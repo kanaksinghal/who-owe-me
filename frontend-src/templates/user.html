@@ -1,0 +1,43 @@
+<div class="jumbotron">
+	<div class="container">
+		<p ng-if="total>=0">People owe me</p>
+		<p ng-if="total<0">I owe People</p>
+		<h1>{{total|currency:"₹":0}}</h1>
+
+		<div>
+			<a href="#" class="btn btn-sm btn-default">Settings</a>
+			<a ui-sref="logout" class="btn btn-sm btn-default">Logout ({{user.name}})</a>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<form class="form-inline" ng-submit="saveEntity()">
+		<div class="form-group">
+			<label class="sr-only">Name*</label>
+			<input type="text" class="form-control" ng-model="entity.name" placeholder="Name*">
+		</div>
+		<div class="form-group">
+			<label class="sr-only">Email</label>
+			<input type="email" class="form-control" ng-model="entity.email" placeholder="Email (Optional)">
+		</div>
+		<button type="submit" class="btn btn-default">Add Entity</button>
+	</form>
+	<p></p>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="entity in entities" ui-sref="log({entity: entity._id})">
+				<td>{{$index+1}}</td>
+				<td>{{entity.name}}</td>
+				<td>{{entity.total|currency:"₹":0}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
