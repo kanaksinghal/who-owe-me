@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require('express');
+const expressStaticGzip = require("express-static-gzip");
 const path = require('path');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
@@ -13,38 +15,18 @@ const apiApp = express();
 const apiAuthApp = express();
 
 // Mongo connection init
-const mongoURI = process.env['MONGO_URI']||'mongodb://localhost/who-owe-me';
 mongoose.Promise = Q.Promise;
-mongoose.connect(mongoURI);
+mongoose.connect(process.env['MONGO_URI']);
 
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, '..', 'dist', 'meta', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../dist')));
+app.use(expressStaticGzip(path.join(__dirname, '..', 'dist'), { maxAge: 365*24*60*60*1000 }));
 
-const User = require('./models/users');
+apiAuthApp.use(require('./controllers/auth'))
 
-apiAuthApp.use((req, res, next) => {
-	User.findOne({
-		_id: req.headers['id'],
-		"token._id": req.headers['authorization'],
-		"token.ua": req.headers['user-agent']
-	})
-	.then(user => {
-		if(!user)
-			throw new Error("Unauthorized request");
-		req.loggedInUser = user;
-		next();
-	})
-	.catch(err => {
-		err.status = 403;
-		next(err);
-	})
-})
-
-const API_DIR = path.join(__dirname, 'routes/api');
+const API_DIR = path.join(__dirname, 'controllers/api-route');
 Q.nfcall(fs.readdir, API_DIR).then((files) => {
 	return files.map(file => {
 		return file.endsWith(".js")?file.replace(/\.js$/, ''):null

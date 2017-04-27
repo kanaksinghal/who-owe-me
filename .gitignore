@@ -42,3 +42,6 @@ jspm_packages
 # Webpack Build
 /dev
 /dist
+
+# Environment variables
+.env
