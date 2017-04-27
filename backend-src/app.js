@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const expressStaticGzip = require("express-static-gzip");
+const gzipStatic = require("connect-gzip-static");
 const path = require('path');
 const favicon = require('serve-favicon');
 const cookieParser = require('cookie-parser');
@@ -22,7 +22,7 @@ app.use(favicon(path.join(__dirname, '..', 'dist', 'meta', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(expressStaticGzip(path.join(__dirname, '..', 'dist'), { maxAge: 365*24*60*60*1000 }));
+app.use(gzipStatic(path.join(__dirname, '..', 'dist'), { maxAge: 365*24*60*60*1000 }));
 
 apiAuthApp.use(require('./controllers/auth'))
 

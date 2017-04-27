@@ -89,7 +89,10 @@ module.exports = function makeWebpackConfig() {
 			// Compiles ES6 and ES7 into ES5 code
 			test: /\.js$/,
 			loader: 'babel-loader',
-			exclude: /node_modules/
+			exclude: /node_modules/,
+			options: {
+				presets: ['env']
+			}
 		},{
 			test: /\.scss$/,
 			use: [{
@@ -225,7 +228,7 @@ module.exports = function makeWebpackConfig() {
 			}),
 			// Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
 			// Minify all javascript, switch loaders to minimizing mode
-			// new webpack.optimize.UglifyJsPlugin(),
+			new webpack.optimize.UglifyJsPlugin({ sourceMap: true, mangle: false }),
 
 			new CompressionPlugin({
 				asset: "[path].gz[query]",
