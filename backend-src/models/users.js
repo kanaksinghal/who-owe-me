@@ -10,9 +10,10 @@ const userSchema = new Schema({
 		required: [true, 'Username is required!'],
 		validate: {
 			validator: function (v) {
-				return /^[a-z0-9]{5,15}$/.test(v);
+				return validator.isEmail(v);
+				// return /^[a-z0-9]{6,20}$/.test(v);
 			},
-			message: 'Username must be between 6 and 15 character long and have alphabet or number'
+			message: 'Invalid email!'
 		},
 		set: function (v) {
 			return v.toLowerCase();

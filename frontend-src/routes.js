@@ -14,6 +14,11 @@ module.exports ={
 		template: require("./templates/login.html"),
 		controller: require("./controllers/login")
 	},
+	signup: {
+		url: "/sugnup",
+		template: require("./templates/signup.html"),
+		controller: require("./controllers/signup")
+	},
 	logout: {
 		url: "/logout",
 		template: "Loading...",
