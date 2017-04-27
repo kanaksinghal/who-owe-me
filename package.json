@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node ./backend-src/bin/www",
-    "build": "rimraf dist && webpack --bail --progress --profile",
-    "ui": "webpack-dev-server --open"
+    "build": "rimraf dist && webpack --progress",
+    "ui": "webpack-dev-server --open",
+	"postinstall": "npm run build"
   },
   "dependencies": {
     "angular": "<1.6",
@@ -29,9 +30,8 @@
     "sass-loader": "^6.0.3",
     "serve-favicon": "~2.3.2",
     "underscore": "^1.8.3",
-    "validator": "^7.0.0"
-  },
-  "devDependencies": {
+    "validator": "^7.0.0",
+	
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",

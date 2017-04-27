@@ -13,12 +13,12 @@ const apiApp = express();
 const apiAuthApp = express();
 
 // Mongo connection init
-const mongoURI = 'mongodb://localhost/who-owe-me';
+const mongoURI = process.env['MONGO_URI']||'mongodb://localhost/who-owe-me';
 mongoose.Promise = Q.Promise;
 mongoose.connect(mongoURI);
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '..', 'dist', 'meta', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

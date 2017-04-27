@@ -225,7 +225,7 @@ module.exports = function makeWebpackConfig() {
 			}),
 			// Reference: http://webpack.github.io/docs/list-of-plugins.html#uglifyjsplugin
 			// Minify all javascript, switch loaders to minimizing mode
-			new webpack.optimize.UglifyJsPlugin(),
+			// new webpack.optimize.UglifyJsPlugin(),
 
 			new CompressionPlugin({
 				asset: "[path].gz[query]",
