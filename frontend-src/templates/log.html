@@ -1,22 +1,26 @@
-<div class="jumbotron">
+<div class="headjumbo jumbotron">
 	<div class="container">
+		<div class="row mbottom-20">
+			<div class="col-xs-6">
+				<a href="#" class="btn btn-sm btn-default">
+					<span class="glyphicon glyphicon-arrow-left"></span>
+					<span class="hidden-xs">Back</span>
+				</a>
+			</div>
+		</div>
 		<p ng-if="entity.total>=0">{{entity.name}} owe me</p>
 		<p ng-if="entity.total<0">I owe {{entity.name}}</p>
-		<h1>{{entity.total|currency:"₹":0}}</h1>
-		<div>
-			<a href="#" class="btn btn-sm btn-default">Send Email</a>
-			<a href="#" class="btn btn-sm btn-default">Settle Account</a>
-			<a href="#" class="btn btn-sm btn-default">Edit Info</a>
+		<strong class="h1">{{entity.total|currency:"₹":0}}</strong>
+		<div class="mtop-15">
+			<a href="#" class="btn btn-sm btn-default" disabled>Send Email</a>
+			<a href="#" class="btn btn-sm btn-default" disabled>Settle Account</a>
+			<a href="#" class="btn btn-sm btn-default" disabled>Edit Info</a>
 			<button type="button" ng-disabled="entity.total!=0" class="btn btn-sm btn-default" ng-click="remove()">Delete Account</button>
 		</div>
 	</div>
 </div>
 
 <div class="container">
-	<ol class="breadcrumb">
-		<li><a href="#">Home</a></li>
-		<li class="active">{{entity.name}}</li>
-	</ol>
 	<form class="form-inline" ng-submit="saveEntity()">
 		<div class="form-group">
 			<label class="sr-only">Date</label>
@@ -24,7 +28,7 @@
 		</div>
 		<div class="form-group">
 			<label class="sr-only">Remark</label>
-			<input type="text" class="form-control" ng-model="logEntry.remark" placeholder="Remark">
+			<input type="text" class="form-control" ng-model="logEntry.remark" placeholder="Remark (optional)">
 		</div>
 		<div class="form-group">
 			<label class="sr-only">Amount</label>

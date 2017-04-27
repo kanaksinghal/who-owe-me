@@ -1,6 +1,6 @@
 const _ = require('underscore');
 
-module.exports = function($scope, $http, $stateParams) {
+module.exports = function($scope, $http, $stateParams, $state) {
 	$http.get('/api/entity/log/'+$stateParams['entity'])
 		.then(resp => {
 			$scope.entity = resp.data;

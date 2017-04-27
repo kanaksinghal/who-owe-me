@@ -20,7 +20,13 @@ module.exports = function($scope, $http, $localStorage, $state) {
 	$scope.saveEntity = function() {
 		$http.post('/api/entity/save', $scope.entity)
 			.then(resp => {
-				$scope.entities.push(resp.data)
+				$scope.entities.push(resp.data);
+				$scope.entity = {};
+			}, resp => {
+				if(resp.data && resp.data.message)
+					$scope.eMsg = resp.data.message;
+				else
+					$scope.eMsg = "Internal Error!";
 			})
 	}
 }

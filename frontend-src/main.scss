@@ -1,0 +1,12 @@
+.headjumbo.jumbotron {
+	background: #34495e;
+	color: #ecf0f1
+}
+
+$directions: top bottom left right;
+@for $i from 0 through 21 {
+	@each $d in $directions {
+		.m#{$d}-#{$i*5} { margin-#{$d}: 0px + $i*5 }
+		.p#{$d}-#{$i*5} { padding-#{$d}: 0px + $i*5 }
+	}
+}
