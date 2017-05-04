@@ -25,7 +25,7 @@ module.exports = function ($injector, $localStorage) {
 		},
 
 		responseError: function(res) {
-			if(res.config.url.startsWith(API_HOST) && res.status=="401") {
+			if(res.config.url.startsWith(API_HOST) && !res.config.url.endsWith('/api/user/logout/') && res.status=="401") {
 				// swal((res.data||{}).Message || "Invalid session! Please login again", null, 'warning');
 				$injector.get('$state').go('logout');
 				return null;
