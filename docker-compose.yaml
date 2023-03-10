@@ -1,0 +1,32 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+volumes:
+  mongo_data:
+    name: mongo_data
+
+services:
+  mongo:
+    image: mongo:3.6
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASS:-default_pass}
+    volumes:
+      - mongo_data:/data/db
+
+  mongo-express:
+    image: mongo-express:0.54
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASS:-default_pass}
+      ME_CONFIG_MONGODB_URL: mongodb://root:${MONGO_PASS:-default_pass}@mongo:27017/
+
+  app:
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_URI: mongodb://root:${MONGO_PASS}@mongo:27017/

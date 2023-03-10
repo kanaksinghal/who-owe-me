@@ -1,0 +1,6 @@
+Dockerfile
+.git
+docker-compose.yaml
+node_modules
+dist
+README.md

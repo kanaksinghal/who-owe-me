@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node ./backend-src/bin/www",
     "build": "rimraf dist && webpack --progress",
-    "ui": "webpack-dev-server --open",
-    "postinstall": "npm run build"
+    "ui": "webpack-dev-server --open"
   },
   "dependencies": {
     "angular": "<1.9",
